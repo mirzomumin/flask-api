@@ -26,7 +26,7 @@ pipeline {
         stage('Lint/Test') {
             steps {
                 sh """
-                    docker run --rm -v \$(pwd):/app -w /app python:3.12-slim bash -c '
+                    docker run --rm -v \$(pwd):/app -w /app python:3.10-slim bash -c '
                         pip install --no-cache-dir ruff &&
                         ruff check .
                     '
@@ -52,8 +52,8 @@ pipeline {
                         ssh -o StrictHostKeyChecking=no ${REMOTE_HOST} '
                             docker pull ${IMAGE_NAME}:${IMAGE_TAG} &&
                             cd ${REMOTE_DIR} &&
-                            docker-compose down &&
-                            docker-compose up -d
+                            docker compose down &&
+                            docker compose up -d
                         '
                     """
                 }
