@@ -1,0 +1,32 @@
+# Virtual Environment
+venv/
+.venv/
+env/
+virtualenv/
+*.egg-info/
+
+# Python Bytecode and Cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Temporary Files
+*.log
+*.tmp
+*.swp
+*.pdf
+
+# Configuration Files
+config.py
+local_settings.py
+.env
+
+# Data Files
+*.sqlite
+*.csv
+*.json
+
+# IDE Specific Files
+.idea/
+.vscode/
+*.sublime-project

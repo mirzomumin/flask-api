@@ -1,0 +1,37 @@
+volumes:
+  postgres_data:
+
+networks:
+  flask_net:
+
+
+services:
+  web:
+    build: .
+    container_name: web
+    command: sh -c "alembic upgrade head && gunicorn main:app"
+    env_file:
+      - .env
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+    networks:
+      - flask_net
+
+  db:
+    image: postgres:16.1-alpine3.19
+    container_name: postgres_db
+    restart: on-failure
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - flask_net
