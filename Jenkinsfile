@@ -15,18 +15,22 @@ pipeline {
             }
         }
 
-        stage('Lint/Test') {
-            steps {
-                sh "pip install ruff"
-                sh "ruff check ."
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 script {
                     sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
                 }
+            }
+        }
+
+        stage('Lint/Test') {
+            steps {
+                sh """
+                    docker run --rm -v $(pwd):/app -w /app python:3.10-slim bash -c '
+                        pip install --no-cache-dir ruff &&
+                        ruff check .
+                    '
+                """
             }
         }
 
