@@ -9,6 +9,7 @@ services:
   web:
     image: mirzomumin/flaskapp:latest
     container_name: web
+    working_dir: /app
     command: sh -c "alembic upgrade head && gunicorn main:app"
     env_file:
       - .env
