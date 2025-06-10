@@ -85,3 +85,35 @@ curl -X GET http://localhost:5000/results'
   {"id":1,"name":"Kirill","score":88,"timestamp":"2025-06-10T00:28:49.990504"}
 ]
 ```
+
+## ⚙️ Как настроить Jenkins
+1. Установить Jenkins и необходимые плагины:
+Docker plugin
+Docker Pipeline
+SSH Agent plugin
+Credentials Binding
+
+2. Добавить креды:
+DockerHub Credentials: dockerhub-credentials (username/password)
+SSH Credentials: ssh-credentials-id (для деплоя на сервер)
+
+3. Создать Pipeline job:
+В Jenkins → New Item → Pipeline
+В разделе Pipeline script from SCM указать:
+Git репозиторий
+Ветка
+Путь к Jenkinsfile (обычно в корне)
+Запустить билд.
+
+## 🔄 Как работает CI/CD
+Пайплайн реализован через Jenkinsfile и состоит из этапов:
+
+📥 Checkout — забирает код из репозитория.
+
+🐳 Build Docker Image — собирает образ приложения.
+
+✅ Lint/Test — прогоняет линтер ruff.
+
+📤 Push Docker Image — пушит образ на DockerHub.
+
+📡 Deploy to Remote Server — подключается по SSH к серверу, обновляет образ и перезапускает контейнеры с помощью Docker Compose.
