@@ -49,6 +49,9 @@ pipeline {
             steps {
                 sshagent (credentials: ['ssh-credentials-id']) {
                     sh """
+                        # Copy updated docker-compose.yml to server
+                        scp -o StrictHostKeyChecking=no docker-compose.yml ${REMOTE_HOST}:${REMOTE_DIR}/
+
                         ssh -o StrictHostKeyChecking=no ${REMOTE_HOST} '
                             docker pull ${IMAGE_NAME}:${IMAGE_TAG} &&
                             cd ${REMOTE_DIR} &&
