@@ -57,7 +57,7 @@ docker compose up -d --build
 
 POST /submit
 ```shell
-curl -X POST http://localhost:5000/submit -H "Content-Type: application/json" -d '{"name": "Mirzomumin", "score": 90}'
+curl -X POST http://37.9.53.88:5000/submit -H "Content-Type: application/json" -d '{"name": "Mirzomumin", "score": 90}'
 ```
 
 ```shell
@@ -66,7 +66,7 @@ curl -X POST http://localhost:5000/submit -H "Content-Type: application/json" -d
 
 GET /ping
 ```shell
-curl -X GET http://localhost:5000/ping'
+curl -X GET http://37.9.53.88:5000/ping'
 ```
 
 ```shell
@@ -75,7 +75,7 @@ curl -X GET http://localhost:5000/ping'
 
 GET /results
 ```shell
-curl -X GET http://localhost:5000/results'
+curl -X GET http://37.9.53.88:5000/results'
 ```
 
 ```shell
